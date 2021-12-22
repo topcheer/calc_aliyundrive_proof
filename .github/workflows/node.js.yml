@@ -46,7 +46,7 @@ jobs:
       run: nexe bn.js -t linux-x64-${{ matrix.node-version }} -o linux-x64-bn-nodejs${{ matrix.node-version }}
     - name: Auto release
       uses: "marvinpinto/action-automatic-releases@latest"
-      if: github.ref == "refs/tags/v*"
+      if: github.ref_name == "v*"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         prerelease: false
