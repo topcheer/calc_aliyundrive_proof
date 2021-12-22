@@ -33,17 +33,17 @@ jobs:
     - name: Install Nexe
       run: npm -g install nexe
     - name: Build executable for mac x64
-      run: nexe bn.js -t macos-x64-${{ matrix.node-version }} -o macos/bn${{ github.ref_name }}_macos
+      run: nexe bn.js -t macos-x64-${{ matrix.node-version }} -o macos/bn_${{ github.ref_name }}_macos
     - name: Build exeutable for windows x64
-      run: nexe bn.js -t windows-x64-${{ matrix.node-version }} -o windows/bn${{ github.ref_name }}_windows.exe
+      run: nexe bn.js -t windows-x64-${{ matrix.node-version }} -o windows/bn_${{ github.ref_name }}_windows.exe
     - name: Build executable for linux x64
-      run: nexe bn.js -t linux-x64-${{ matrix.node-version }} -o linux/bn${{ github.ref_name }}_linux
+      run: nexe bn.js -t linux-x64-${{ matrix.node-version }} -o linux/bn_${{ github.ref_name }}_linux
     - name: Auto release
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         prerelease: false
         files: |
-          macos/bn${{ github.ref_name }}_macos
-          windows/bnbn${{ github.ref_name }}_windows.exe
-          linux/bn${{ github.ref_name }}_linux
+          macos/bn_${{ github.ref_name }}_macos
+          windows/bn_${{ github.ref_name }}_windows.exe
+          linux/bn_${{ github.ref_name }}_linux
