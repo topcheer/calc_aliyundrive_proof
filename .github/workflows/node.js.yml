@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: auto
 
 on:
   push:
@@ -46,6 +46,7 @@ jobs:
       run: nexe bn.js -t linux-x64-${{ matrix.node-version }} -o linux-x64-bn-nodejs${{ matrix.node-version }}
     - name: Auto release
       uses: "marvinpinto/action-automatic-releases@latest"
+      if: github.ref == "refs/tags/v*"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         prerelease: false
