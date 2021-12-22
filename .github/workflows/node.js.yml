@@ -5,15 +5,9 @@ name: auto
 
 on:
   push:
-    branches: 
-      - main
-      - release/*
     tags: 
       - "v*"
   pull_request:
-    branches: 
-      - main
-      - release/*
     tags:
       - "v*"
 
@@ -50,6 +44,7 @@ jobs:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         prerelease: false
         automatic_release_tag: ${{github.ref-name}}
+        title: Release ${{github.ref-name}}
         files: |
           macos-x64-bn-nodejs${{ matrix.node-version }}
           windows-x64-bn-nodejs${{ matrix.node-version }}.exe
