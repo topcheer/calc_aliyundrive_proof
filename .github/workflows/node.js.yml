@@ -9,13 +9,13 @@ on:
       - main
       - release/*
     tags: 
-      - "*"
+      - "v*"
   pull_request:
     branches: 
       - main
       - release/*
     tags:
-      - "*"
+      - "v*"
 
 jobs:
   build:
@@ -44,11 +44,12 @@ jobs:
       run: nexe bn.js -t windows-x64-${{ matrix.node-version }} -o windows-x64-bn-nodejs${{ matrix.node-version }}
     - name: Build executable for linux
       run: nexe bn.js -t linux-x64-${{ matrix.node-version }} -o linux-x64-bn-nodejs${{ matrix.node-version }}
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v2.3.1
+    - name: Auto release
+    - uses: "marvinpinto/action-automatic-releases@latest"
       with:
-        name: aliyundrive-bn
-        path: |
-          macos-x64-bn-nodejs${{ matrix.node-version }}
-          windows-x64-bn-nodejs${{ matrix.node-version }}
-          linux-x64-bn-nodejs${{ matrix.node-version }}
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            macos-x64-bn-nodejs${{ matrix.node-version }}
+            windows-x64-bn-nodejs${{ matrix.node-version }}
+            linux-x64-bn-nodejs${{ matrix.node-version }}
