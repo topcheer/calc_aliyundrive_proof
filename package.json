@@ -1,0 +1,13 @@
+{
+  "name": "calc_aliyundrive_proof",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bn.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bignumber.js": "^9.0.2",
+    "yargs": "^17.3.0"
+  }
+}
