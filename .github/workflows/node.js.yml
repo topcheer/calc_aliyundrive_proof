@@ -45,7 +45,7 @@ jobs:
     - name: Build executable for linux
       run: nexe bn.js -t linux-x64-${{ matrix.node-version }} -o linux-x64-bn-nodejs${{ matrix.node-version }}
     - name: Auto release
-    - uses: "marvinpinto/action-automatic-releases@latest"
+      uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         prerelease: false
