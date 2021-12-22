@@ -17,15 +17,11 @@ jobs:
     strategy:
       matrix:
         node-version: [14.15.3]
-        os:
-          - ubuntu-20.04
-          - windows-2019
-          - macos-10.15
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
+    - name: Use Node.js ${{ matrix.node-version }} 
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
@@ -34,6 +30,10 @@ jobs:
       run: npm ci
     - name: Install Nexe
       run: npm -g install nexe
-    - name: Build executable
-      run: nexe --build bn.js
+    - name: Build executable for mac 
+      run: nexe --build bn.js -t macos-x64-${{ matrix.node-version }} -o macos-x64-bn-nodejs${{ matrix.node-version }}
+    - name: Build exeutable for windows
+      run: nexe --build bn.js -t windows-x64-${{ matrix.node-version }} -o windows-x64-bn-nodejs${{ matrix.node-version }}
+    - name: Build executable for linux
+      run: nexe --build bn.js -t linux-x64-${{ matrix.node-version }} -o linux-x64-bn-nodejs${{ matrix.node-version }}
     
